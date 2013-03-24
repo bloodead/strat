@@ -67,23 +67,23 @@ int	red_and_blue_file(char* buffer)
 	long		size;
 	ifstream	file;
 
-		file.open (buffer);
-		if (file.is_open())
-		{
-			pbuf = file.rdbuf();
-			size = pbuf->pubseekoff (0,ios::end,ios::in);
-			pbuf->pubseekpos (0,ios::in);
-			buffer = new char[size];
-			pbuf->sgetn (buffer,size);
-			file.close();
-			cout.write (buffer,size);
-			if (save_pos(buffer) == -1)
-				return (-1);
-			delete[] buffer;
-		}
-		else
+	file.open (buffer);
+	if (file.is_open())
+	{
+		pbuf = file.rdbuf();
+		size = pbuf->pubseekoff (0,ios::end,ios::in);
+		pbuf->pubseekpos (0,ios::in);
+		buffer = new char[size];
+		pbuf->sgetn (buffer,size);
+		file.close();
+		cout.write (buffer,size);
+		if (save_pos(buffer) == -1)
 			return (-1);
-		return 0;
+		delete[] buffer;
+	}
+	else
+		return (-1);
+	return 0;
 }
 
 int	main(int argc, char** argv)
