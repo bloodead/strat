@@ -1,63 +1,63 @@
 #include "struct.h"
 
-int	init_marshal(void)
+int	init_marshal(int)
 {
-//	marshal 1;
+//	marshal m;
 	return (0);
 }
 
-int	init_general(void)
+int	init_general(int)
 {
-//	general 2;
+//	general m;
 	return (0);
 }
-int	init_colonel(void)
+int	init_colonel(int)
 {
-//	colonel 3;
+//	colonel m;
 	return (0);
 }
-int	init_major(void)
+int	init_major(int)
 {
-//	major 4;
+//	major m;
 	return (0);
 }
-int	init_captain(void)
+int	init_captain(int)
 {
-//	captain 5;
+//	captain m;
 	return (0);
 }
-int	init_lieutnant(void)
+int	init_lieutnant(int)
 {
-//	lieutnant 6;
+//	lieutnant m;
 	return (0);
 }
-int	init_sergeant(void)
+int	init_sergeant(int)
 {
-//	sergeant 7;
+//	sergeant m;
 	return (0);
 }
-int	init_miner(void)
+int	init_miner(int)
 {
-//	sergeant 8;
+//	sergeant m;
 	return (0);
 }
-int	init_scout(void)
+int	init_scout(int)
 {
-//	scout 9;
+//	scout m;
 	return (0);
 }
-int	init_spy(void)
+int	init_spy(int)
 {
-//	spy S;
+//	spy m;
 	return (0);
 }
-int	init_bomb(void)
+int	init_bomb(int)
 {
-//	bomb B;
+//	bomb m;
 	return (0);
 }
-int	init_flag(void)
+int	init_flag(int)
 {
-//	flag F;
+//	flag m;
 	return (0);
 }

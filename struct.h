@@ -4,7 +4,13 @@
 struct	s_piece
 {
 	char	c;
-	int	(*fct)(void);
+	int	(*fct)(int);
+};
+
+struct	s_wordcase
+{
+	int	id;
+//	L	refclass;
 };
 
 #endif

@@ -4,42 +4,42 @@
 #include "init_object.h"
 using namespace std;
 
-int	if_object(char buf)
+s_piece*	if_object(s_piece* c)
 {
-	s_piece c[12];
-	(void)c;
-	(void)buf;
 	c[0].c = '1';
 	c[0].fct = init_marshal;
-	c[2].c = '2';
-	c[2].fct = init_general;
-	c[3].c = '3';
-	c[3].fct = init_colonel;
-	c[4].c = '4';
-	c[4].fct = init_major;
-	c[5].c = '5';
-	c[5].fct = init_captain;
-	c[6].c = '6';
-	c[6].fct = init_lieutnant;
-	c[7].c = '7';
-	c[7].fct = init_sergeant;
-	c[8].c = '8';
-	c[8].fct = init_miner;
-	c[9].c = '9';
-	c[9].fct = init_scout;
-	c[10].c = 'S';
-	c[10].fct = init_spy;
-	c[11].c = 'B';
-	c[11].fct = init_bomb;
-	c[12].c = 'F';
-	c[12].fct = init_flag;
-	return (0);
+	c[1].c = '2';
+	c[1].fct = init_general;
+	c[2].c = '3';
+	c[2].fct = init_colonel;
+	c[3].c = '4';
+	c[3].fct = init_major;
+	c[4].c = '5';
+	c[4].fct = init_captain;
+	c[5].c = '6';
+	c[5].fct = init_lieutnant;
+	c[6].c = '7';
+	c[6].fct = init_sergeant;
+	c[7].c = '8';
+	c[7].fct = init_miner;
+	c[8].c = '9';
+	c[8].fct = init_scout;
+	c[9].c = 'S';
+	c[9].fct = init_spy;
+	c[10].c = 'B';
+	c[10].fct = init_bomb;
+	c[11].c = 'F';
+	c[11].fct = init_flag;
+	return (c);
 }
 
 int	save_pos(char* buffer)
 {
 	int	i;
+	int	w;
 
+	s_piece* c;
+	c = new s_piece[12];
 	i = 0;
 	while (buffer[i] != '\0' && i != 10)
 	{
@@ -47,9 +47,16 @@ int	save_pos(char* buffer)
 			return (-1);
 		else
 		{
-			if (if_object(buffer[i]) == -1)
-				return (-1);
+			c = if_object(c);
+			w = 0;
+			while (w != 12)
+			{
+				if (c[i].c == buffer[i])
+					c[i].fct(i);
+				w = w + 1;
+			}
 		}
+		i = i + 1;
 	}
 	return (0);
 }
@@ -79,8 +86,11 @@ int	red_and_blue_file(char* buffer)
 		return 0;
 }
 
-int	init_object(int argc, char** argv)
+int	main(int argc, char** argv)
 {
+	s_wordcase*	wordcase;
+	wordcase = new s_wordcase[100];
+	(void)wordcase;
 	if (argc != 3)
 	{
 		cout << "Error Arguments" << endl;

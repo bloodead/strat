@@ -1,17 +1,17 @@
 #ifndef __INIT_OBJECT_H__
 #define __INIT_OBJECT_H__
 
-int	init_marshal(void);
-int	init_general(void);
-int	init_colonel(void);
-int	init_major(void);
-int	init_captain(void);
-int	init_lieutnant(void);
-int	init_sergeant(void);
-int	init_miner(void);
-int	init_scout(void);
-int	init_spy(void);
-int	init_bomb(void);
-int	init_flag(void);
+int	init_marshal(int);
+int	init_general(int);
+int	init_colonel(int);
+int	init_major(int);
+int	init_captain(int);
+int	init_lieutnant(int);
+int	init_sergeant(int);
+int	init_miner(int);
+int	init_scout(int);
+int	init_spy(int);
+int	init_bomb(int);
+int	init_flag(int);
 
 #endif
