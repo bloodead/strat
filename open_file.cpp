@@ -1,87 +1,111 @@
 #include <fstream>
 #include <iostream>
+#include "struct.h"
+#include "init_object.h"
 using namespace std;
-/*
+
+s_piece*	if_object(s_piece* c)
+{
+	c[0].c = '1';
+	c[0].fct = init_marshal;
+	c[1].c = '2';
+	c[1].fct = init_general;
+	c[2].c = '3';
+	c[2].fct = init_colonel;
+	c[3].c = '4';
+	c[3].fct = init_major;
+	c[4].c = '5';
+	c[4].fct = init_captain;
+	c[5].c = '6';
+	c[5].fct = init_lieutnant;
+	c[6].c = '7';
+	c[6].fct = init_sergeant;
+	c[7].c = '8';
+	c[7].fct = init_miner;
+	c[8].c = '9';
+	c[8].fct = init_scout;
+	c[9].c = 'S';
+	c[9].fct = init_spy;
+	c[10].c = 'B';
+	c[10].fct = init_bomb;
+	c[11].c = 'F';
+	c[11].fct = init_flag;
+	return (c);
+}
+
 int	save_pos(char* buffer)
 {
 	int	i;
+	int	w;
 
+	s_piece* c;
+	c = new s_piece[12];
 	i = 0;
-	while(buffer[i] != '\0' && ((buffer[i] >= '1' && buffer[i] <= '9') ||
-	      buffer[i] == 'S' || buffer[i] == 'B' || buffer[i] == 'F') && i <= 10)
+	while (buffer[i] != '\0' && i != 10)
 	{
 		if (buffer[i] == ' ')
-			return (1);
+			return (-1);
 		else
-			return (2);
+		{
+			c = if_object(c);
+			w = 0;
+			while (w != 12)
+			{
+				if (c[i].c == buffer[i])
+					c[i].fct(i);
+				w = w + 1;
+			}
+		}
 		i = i + 1;
 	}
 	return (0);
-}
-*/
-int	save_pos(char* buffer)
-{
-	int	i;
-	int	count_al;
-	int	count_obj;
-
-	i = 0;
-	count_al = 0;
-	count_obj = 0;
-	while (buffer[i] != '\0')
-	{
-		if (buffer[i] == ' ')
-			i = i + 1;
-		else
-		{
-			count_obj = if_object()
-			if (count_obj == -1)
-				return (-1);
-		}
-	}
 }
 
 int	red_and_blue_file(char* buffer)
 {
 	filebuf*	pbuf;
 	long		size;
-	int		res;
 	ifstream	file;
 
-		file.open (buffer);
-		if (file.is_open())
-		{
-			pbuf = file.rdbuf();
-			size = pbuf->pubseekoff (0,ios::end,ios::in);
-			pbuf->pubseekpos (0,ios::in);
-			buffer = new char[size];
-			pbuf->sgetn (buffer,size);
-			file.close();
-			cout.write (buffer,size);
-			res = save_pos(buffer);
-			if (res == 0)
-				cout << "Res = 0" << endl;
-			if (res == -1)
-				cout << "Res = -1" << endl;
-			if (res == 1)
-				cout << "Res = 1" << endl;
-			if (res == 2)
-				cout << "Res = 2" << endl;
-			delete[] buffer;
-		}
-		else
+	file.open (buffer);
+	if (file.is_open())
+	{
+		pbuf = file.rdbuf();
+		size = pbuf->pubseekoff (0,ios::end,ios::in);
+		pbuf->pubseekpos (0,ios::in);
+		buffer = new char[size];
+		pbuf->sgetn (buffer,size);
+		file.close();
+		cout.write (buffer,size);
+		if (save_pos(buffer) == -1)
 			return (-1);
-		return 0;
+		delete[] buffer;
+	}
+	else
+		return (-1);
+	return 0;
 }
 
-int	main(int argc, char** argv)
+int	open_file(int argc, char** argv)
 {
+	s_wordcase*	wordcase;
+	wordcase = new s_wordcase[100];
+	(void)wordcase;
 	if (argc != 3)
+	{
 		cout << "Error Arguments" << endl;
+		return (-1);
+	}
 	else
 		if (red_and_blue_file(argv[1]) == -1)
-			cout << "Error in the Argv[1]" << endl;
+		{
+			cout << "Error open the Argv[1]" << endl;
+			return (-1);
+		}
 		if (red_and_blue_file(argv[2]) == -1)
-			cout << "Error in the Argv[2]" << endl;
+		{
+			cout << "Error open the Argv[2]" << endl;
+			return (-1);
+		}
 	return (0);
 }

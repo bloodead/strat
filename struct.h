@@ -10,7 +10,6 @@ struct	s_piece
 struct	s_wordcase
 {
 	int	id;
-//	L	refclass;
 };
 
 #endif
