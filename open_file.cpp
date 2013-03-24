@@ -1,51 +1,63 @@
 #include <fstream>
 #include <iostream>
+#include "struct.h"
+#include "init_object.h"
 using namespace std;
-/*
-int	save_pos(char* buffer)
-{
-	int	i;
 
-	i = 0;
-	while(buffer[i] != '\0' && ((buffer[i] >= '1' && buffer[i] <= '9') ||
-	      buffer[i] == 'S' || buffer[i] == 'B' || buffer[i] == 'F') && i <= 10)
-	{
-		if (buffer[i] == ' ')
-			return (1);
-		else
-			return (2);
-		i = i + 1;
-	}
+int	if_object(char buf)
+{
+	s_piece c[12];
+	(void)c;
+	(void)buf;
+	c[0].c = '1';
+	c[0].fct = init_marshal;
+	c[2].c = '2';
+	c[2].fct = init_general;
+	c[3].c = '3';
+	c[3].fct = init_colonel;
+	c[4].c = '4';
+	c[4].fct = init_major;
+	c[5].c = '5';
+	c[5].fct = init_captain;
+	c[6].c = '6';
+	c[6].fct = init_lieutnant;
+	c[7].c = '7';
+	c[7].fct = init_sergeant;
+	c[8].c = '8';
+	c[8].fct = init_miner;
+	c[9].c = '9';
+	c[9].fct = init_scout;
+	c[10].c = 'S';
+	c[10].fct = init_spy;
+	c[11].c = 'B';
+	c[11].fct = init_bomb;
+	c[12].c = 'F';
+	c[12].fct = init_flag;
 	return (0);
 }
-*/
+
 int	save_pos(char* buffer)
 {
 	int	i;
-	int	count_al;
-	int	count_obj;
 
 	i = 0;
-	count_al = 0;
-	count_obj = 0;
-	while (buffer[i] != '\0')
+	while (buffer[i] != '\0' && i != 10)
 	{
 		if (buffer[i] == ' ')
-			i = i + 1;
+			return (-1);
 		else
 		{
-			count_obj = if_object()
-			if (count_obj == -1)
+			if (if_object(buffer[i]) == -1)
 				return (-1);
 		}
 	}
+	return (0);
 }
 
 int	red_and_blue_file(char* buffer)
 {
 	filebuf*	pbuf;
 	long		size;
-	int		res;
 	ifstream	file;
 
 		file.open (buffer);
@@ -58,15 +70,8 @@ int	red_and_blue_file(char* buffer)
 			pbuf->sgetn (buffer,size);
 			file.close();
 			cout.write (buffer,size);
-			res = save_pos(buffer);
-			if (res == 0)
-				cout << "Res = 0" << endl;
-			if (res == -1)
-				cout << "Res = -1" << endl;
-			if (res == 1)
-				cout << "Res = 1" << endl;
-			if (res == 2)
-				cout << "Res = 2" << endl;
+			if (save_pos(buffer) == -1)
+				return (-1);
 			delete[] buffer;
 		}
 		else
@@ -74,14 +79,23 @@ int	red_and_blue_file(char* buffer)
 		return 0;
 }
 
-int	main(int argc, char** argv)
+int	init_object(int argc, char** argv)
 {
 	if (argc != 3)
+	{
 		cout << "Error Arguments" << endl;
+		return (-1);
+	}
 	else
 		if (red_and_blue_file(argv[1]) == -1)
-			cout << "Error in the Argv[1]" << endl;
+		{
+			cout << "Error open the Argv[1]" << endl;
+			return (-1);
+		}
 		if (red_and_blue_file(argv[2]) == -1)
-			cout << "Error in the Argv[2]" << endl;
+		{
+			cout << "Error open the Argv[2]" << endl;
+			return (-1);
+		}
 	return (0);
 }
